@@ -5,6 +5,9 @@ provider "aws" {
 module "webserver_cluster" {
   source = "../../../modules/services/webserver-cluster"
   # source = "github.com/foo/modules//webserver-cluster?ref=v0.0.1"
+
+  ami = "ami-smth"
+  server_text = "Some server text, ya'll know"
   
   cluster_name = "webserver-stage"
   db_remote_state_bucket = "SOME_NAME"
@@ -13,7 +16,8 @@ module "webserver_cluster" {
   instance_type = "t2.micro"
   min_size = 2
   max_size = 2
-  enable_autoscaling = true
+  enable_autoscaling = false
+  enable_new_user_data = true
 
   custom_tags = {
     Owner = "team-foo"
